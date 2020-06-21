@@ -26,11 +26,18 @@
  * The second converts the arguments into a two-dimensional array which
  * represents the switch matrix.
  */
+
+#define XX KC_NO
+
 #define LAYOUT( \
-    k00, k01, k02, \
-      k10,  k12    \
+  A1, B1, C1, D1, E1, F1, G1, H1, I1, J1, K1, L1, \
+  A2, B2, C2, D2, E2, F2, G2, H2, I2, J2, K2, L2, \
+  A3, B3, C3, D3, E3, F3, G3, H3, I3, J3, K3, L3, \
+  A4, B4, C4, D4, F4, I4, J4, K4, L4  \
 ) \
 { \
-    { k00, k01,   k02 }, \
-    { k10, KC_NO, k12 }  \
+  { A1, B1, C1, D1, E1, F1, G1, H1, I1, J1, K1, L1 }, \
+  { A2, B2, C2, D2, E2, F2, G2, H2, I2, J2, K2, L2 }, \
+  { A3, B3, C3, D3, E3, F3, G3, H3, I3, J3, K3, L3 }, \
+  { A4, B4, C4, D4, XX, F4, XX, XX, I4, J4, K4, L4 }  \
 }
