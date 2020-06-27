@@ -1,10 +1,10 @@
-# akb45
+# AKB45
 
 ![akb45](imgur.com image replace me!)
 
 A short description of the keyboard/project
 
-* Keyboard Maintainer: [HAMANO Tsukasa](https://github.com/yourusername)
+* Keyboard Maintainer: [HAMANO Tsukasa](https://github.com/hamano)
 * Hardware Supported: The PCBs, controllers supported
 * Hardware Availability: Links to where you can find this hardware
 
