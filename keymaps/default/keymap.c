@@ -15,6 +15,12 @@
  */
 #include QMK_KEYBOARD_H
 
+enum custom_keycodes {
+  AUTH_PW = SAFE_RANGE,
+  AUTH_UP
+};
+
+
 // Defines names for use in layer keycodes and the keymap
 enum layer_names {
   _BASE,
@@ -30,48 +36,28 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_ESC, KC_Q,   KC_W,   KC_E,   KC_R,   KC_T,   KC_Y,   KC_U,   KC_I,   KC_O,   KC_P,   KC_BSPC,
     KC_LCTL,KC_A,   KC_S,   KC_D,   KC_F,   KC_G,   KC_H,   KC_J,   KC_K,   KC_L,   KC_SCLN,KC_ENT,
     KC_LSFT,KC_Z,   KC_X,   KC_C,   KC_V,   KC_B,   KC_N,   KC_M,   KC_COMM,KC_DOT, KC_SLSH,KC_NO,
-    KC_NO, KC_LALT,KC_LGUI,MT_CS,           MT_LSS,         RAISE,  RAISE,  KC_RGUI,KC_RALT
+    KC_NO, KC_LALT,KC_LGUI,MT_CS,           MT_LSS,         RAISE,  RAISE,  KC_RALT,AUTH_UP
   ),
   [_RAISE] = LAYOUT(
-    KC_GRV, KC_1,   KC_2,   KC_3,   KC_4,   KC_5,   KC_6,   KC_7,   KC_8,   KC_9,   KC_0,  KC_NO,
+    KC_GRV, KC_1,   KC_2,   KC_3,   KC_4,   KC_5,   KC_6,   KC_7,   KC_8,   KC_9,   KC_0,   KC_NO,
     KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,
     KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,
-    KC_NO,  KC_NO,  KC_NO,  KC_NO,          KC_NO,          KC_NO,  KC_NO,  KC_NO,  KC_NO
-)
+    KC_NO,  KC_NO,  KC_NO,  KC_NO,          KC_NO,          KC_NO,  KC_NO,  KC_NO,  AUTH_PW
+  )
 };
 
-/*
+void keyboard_post_init_user(void) {
+    akb_init();
+}
+
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
-        case QMKBEST:
-            if (record->event.pressed) {
-                // when keycode QMKBEST is pressed
-                SEND_STRING("QMK is the best thing ever!");
-            } else {
-                // when keycode QMKBEST is released
-            }
-            break;
-        case QMKURL:
-            if (record->event.pressed) {
-                // when keycode QMKURL is pressed
-                SEND_STRING("https://qmk.fm/\n");
-            } else {
-                // when keycode QMKURL is released
-            }
-            break;
+    case AUTH_PW:
+        akb_pw(record);
+        break;
+    case AUTH_UP:
+        akb_up(record);
+        break;
     }
     return true;
 }
-
-void matrix_init_user(void) {
-
-}
-
-void matrix_scan_user(void) {
-
-}
-
-bool led_update_user(led_t led_state) {
-    return true;
-}
-*/
