@@ -19,6 +19,33 @@
 // Optional override functions below.
 // You can leave any or all of these undefined.
 // These are only required if you want to perform custom actions.
+user_config_t user_config = { true };
+
+void akb_init() {
+    setPinOutput(AUTH_UP_PIN);
+    writePin(AUTH_UP_PIN, 0);
+    setPinOutput(AUTH_PW_PIN);
+    if (user_config.auth_pw_state) {
+        writePin(AUTH_PW_PIN, user_config.auth_pw_state);
+    }
+}
+
+void akb_pw(keyrecord_t *record) {
+    if (record->event.pressed) {
+        user_config.auth_pw_state ^= 1;
+        writePin(AUTH_PW_PIN, user_config.auth_pw_state);
+        //eeconfig_update_user(user_config.raw);
+    }
+}
+
+void akb_up(keyrecord_t *record) {
+    if (record->event.pressed) {
+        writePin(AUTH_UP_PIN, 1);
+    } else {
+        writePin(AUTH_UP_PIN, 0);
+    }
+}
+
 
 /*
 void matrix_init_kb(void) {

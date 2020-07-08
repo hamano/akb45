@@ -41,3 +41,17 @@
   { A3, B3, C3, D3, E3, F3, G3, H3, I3, J3, K3, L3 }, \
   { A4, B4, C4, D4, XX, F4, XX, XX, I4, J4, K4, L4 }  \
 }
+
+#define AUTH_PW_PIN D3
+#define AUTH_UP_PIN D2
+
+typedef union {
+    uint32_t raw;
+    struct {
+        bool auth_pw_state :1;
+    };
+} user_config_t;
+
+void akb_init(void);
+void akb_pw(keyrecord_t *);
+void akb_up(keyrecord_t *);
